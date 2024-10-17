@@ -23,7 +23,7 @@ export const getUserById = async (id) => {
     } catch (error) {
         console.error("There was an error retrieving the user", id, error);
         throw error;
-    }
+    } 
 
 };
 

@@ -1,13 +1,19 @@
-
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from "../../components/images/Logo.png";
+import { AuthContext } from "./AuthorizationContext";
 
 const Login = () => {
+   const { login } = useContext(AuthContext);
+
+  const handleLogin = () => {
+    login({ userName: 'Chuck', userEmail: 'chuck@gritsly.co.za' });
+  };
+
   const initialState = {
     userEmail: '',
-    userPassword: ''
+    userPassword: ""
   };
 
   const [formValues, setFormValues] = useState(initialState);
@@ -50,77 +56,33 @@ const Login = () => {
     return true;
   };
 
-  // // Handle Submit - Login
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setError('');
-
-  //   if (!validateForm()) {
-  //     return;
-  //   }
-
-  //   try {
-  //     const response = await axios.post('http://localhost:8080/api/login',
-  //       formValues,
-  //       { withCredentials: true } 
-  //     );
-      
-  //     if (response.status === 200) {
-        
-  //       navigate('/main');
-  //     } else {
-  //       setError('Unexpected login failure. Please try again.');
-  //     }
-  //   } catch (error) {
-  //     setError('Invalid Email or Password');
-  //     console.error("Login failed:", error);
-
-  //     setFormValues({ ...formValues, userPassword: '' });
-  //   }
-  // };
-
 // Handle Submit - Login
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setError('');
-
-  if (!validateForm()) {
-    return;
-  }
-
-  try {
-    // Perform login request with provided userEmail and userPassword
-    const response = await axios.post('http://localhost:8080/api/login', {
-      // userEmail: formValues.userEmail,
-      // userPassword: formValues.userPassword,
-      userEmail: 'chuck@gritsly.co.za',
-      userPassword: 'xY?mhd^ZGFFcn)',
-    }, { 
-      withCredentials: true  // Ensure cookies are included in the request
-    });
-
-    if (response.status === 200) {
-      console.log('Login successful:', response.data);
-
-      // After successful login, you can redirect or handle further actions
-      navigate('/main');
-    } else {
-      setError('Unexpected login failure. Please try again.');
-    }
-  } catch (error) {
-    if (error.response) {
-      // If there's a response from the server (e.g., invalid credentials)
-      setError('Invalid Email or Password');
-      console.error('Error logging in:', error.response.data);
-    } else {
-      // If no response or network error
-      setError('Network Error: Please check your connection.');
-      console.error('Login failed:', error);
-    }
-
-    // Clear the password field after an error
-    setFormValues({ ...formValues, userPassword: '' });
-  }
+const handleSubmit = async (e) => {  
+  e.preventDefault();  
+  setError('');  
+  
+  if (!validateForm()) {  
+   return;  
+  }  
+  
+  try {  
+   const response = await axios.post('http://localhost:8080/api/login',  
+    formValues,  
+    { withCredentials: true }  
+   );  
+      
+   if (response.status === 200) {  
+       
+    navigate('/main');  
+   } else {  
+    setError('Unexpected login failure. Please try again.');  
+   }  
+  } catch (error) {  
+   setError('Invalid Email or Password');  
+   console.error("Login failed:", error);  
+  
+   setFormValues({ ...formValues, userPassword: '' });  
+  }  
 };
 
 
@@ -176,10 +138,9 @@ const handleSubmit = async (e) => {
             >
               Cancel
             </button>
-            <button
+            <button onClick={handleLogin}
               type="submit"
-              className="w-full h-10 px-6 m-2 bg-blue-500 text-white rounded-lg focus:shadow-outline hover:bg-blue-700"
-            >
+              className="w-full h-10 px-6 m-2 bg-blue-500 text-white rounded-lg focus:shadow-outline hover:bg-blue-700">
               Login
             </button>
           </div>
@@ -188,5 +149,6 @@ const handleSubmit = async (e) => {
     </div>
   );
 };
+
 
 export default Login; 

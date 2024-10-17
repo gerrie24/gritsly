@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { AuthProvider } from "./pages/Login/AuthorizationContext";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './input.css';
 //import App from './App';
@@ -30,33 +31,34 @@ Modal.setAppElement('#root');
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <Router basename="">
-      <Routes>
-        <Route exact path="/" element={<Login />} />
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/main" element={<Main />} />
-        <Route exact path="/contractmanagement" element={<ContractManagement />} />
-        <Route exact path="/securedcontracts" element={<SecuredContracts />} />
-        <Route exact path="/maizereceived" element={<MaizeReceived />} />
-        <Route exact path="/containermill" element={<ContainerMill />} />
-        <Route exact path="/gritmill" element={<GritMill />} />
-        <Route exact path="/maizemealmill" element={<MaizeMealMill />} />
-        <Route exact path="/sampmill" element={<SampMill />} />
-        <Route exact path="/scalereadings" element={<ScaleReadings />} />
-        <Route exact path="/siloreport" element={<SiloReport />} />
-        <Route exact path="/outputreport" element={<OutputReport />} />
-        <Route exact path="/monthtomonthcomparisonreport" element={<MonthToMonthComparisonReport />} />
-        <Route exact path="/screenings" element={<Screenings />} />
-        <Route exact path="/salesconfirmation" element={<SalesConfirmation />} />
-        <Route exact path="/loadingScheduleApprovals" element={<LoadingScheduleApprovals />} />
-        <Route exact path="/bookedloadschedules" element={<BookedLoadSchedules />} />
-        <Route exact path="/invoices" element={<Invoices />} />
-        <Route exact path="/usermanagement" element={<UserManagement />} />
-        <Route exact path="/userroles" element={<UserRoles />} />
-        <Route exact path="/systemconfig" element={<SystemSettings />} />
-
-      </Routes>
-    </Router>
-  </React.StrictMode>
+  <AuthProvider>
+    <React.StrictMode>
+      <Router basename="">
+        <Routes>
+          <Route exact path="/" element={<Login />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/main" element={<Main />} />
+          <Route exact path="/contractmanagement" element={<ContractManagement />} />
+          <Route exact path="/securedcontracts" element={<SecuredContracts />} />
+          <Route exact path="/maizereceived" element={<MaizeReceived />} />
+          <Route exact path="/containermill" element={<ContainerMill />} />
+          <Route exact path="/gritmill" element={<GritMill />} />
+          <Route exact path="/maizemealmill" element={<MaizeMealMill />} />
+          <Route exact path="/sampmill" element={<SampMill />} />
+          <Route exact path="/scalereadings" element={<ScaleReadings />} />
+          <Route exact path="/siloreport" element={<SiloReport />} />
+          <Route exact path="/outputreport" element={<OutputReport />} />
+          <Route exact path="/monthtomonthcomparisonreport" element={<MonthToMonthComparisonReport />} />
+          <Route exact path="/screenings" element={<Screenings />} />
+          <Route exact path="/salesconfirmation" element={<SalesConfirmation />} />
+          <Route exact path="/loadingScheduleApprovals" element={<LoadingScheduleApprovals />} />
+          <Route exact path="/bookedloadschedules" element={<BookedLoadSchedules />} />
+          <Route exact path="/invoices" element={<Invoices />} />
+          <Route exact path="/usermanagement" element={<UserManagement />} />
+          <Route exact path="/userroles" element={<UserRoles />} />
+          <Route exact path="/systemconfig" element={<SystemSettings />} />
+        </Routes>
+      </Router>
+    </React.StrictMode>
+  </AuthProvider>
 );
