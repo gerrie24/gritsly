@@ -1,11 +1,32 @@
-import React, { useContext, useState } from 'react';
+import React, {  useContext, useState } from 'react'; //useContext,
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from "../../components/images/Logo.png";
 import { AuthContext } from "./AuthorizationContext";
 
-const Login = () => {
-   const { login } = useContext(AuthContext);
+// const Login = () => {
+//    const { login } = useContext(AuthContext);
+
+const Login = async (email, password) => {  
+  // const response = await fetch('/api/login', {  
+  //   method: 'POST',  
+  //   headers: {  
+  //     'Content-Type': 'application/json',  
+  //   },  
+  //   body: JSON.stringify({ email, password }),  
+  //   });  
+    
+  //   const data = await response.json();  
+    
+  //   if (data.success) {  
+  //       const user = data.user;  
+  //       useState(user);  
+  //   } else {  
+  //   console.error(data.error);  
+  //   }  
+
+  const { login } = useContext(AuthContext);
+
 
   const handleLogin = () => {
     login({ userName: 'Chuck', userEmail: 'chuck@gritsly.co.za' });
